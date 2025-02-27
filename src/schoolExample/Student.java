@@ -26,7 +26,7 @@ public class Student {
     }
 
     //시험을 보다
-    public void takeTest(Subject subject) {
+    public void takeExam(Subject subject) {
         if (subject == Subject.ENGLISH) {
             englishScore = englishAbility;
         } else if (subject == Subject.MATH) {

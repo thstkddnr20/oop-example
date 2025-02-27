@@ -1,28 +1,40 @@
 package schoolExample;
 
+import java.util.List;
+import java.util.Map;
+
 public class Teacher {
+    private School school;
     private final Subject role;
+    private Map<Day, Classroom> schedule;
     private int money;
     private int salary;
 
     public Teacher(Subject role, int salary) {
         this.role = role;
         this.salary = salary;
+        schedule = null;
+        school = null;
     }
 
-    //선생의 역할 1. 학생을 가르치다
-    //가르치는건 선생이지만, 공부는 학생이 한다
-    public void teachStudent(Student student) {
-        student.study(role);
+    public void teach(Day day) {
+        Classroom classroom = schedule.get(day);
+        classroom.takeClass(role);
     }
 
-    //선생의 역할 2. 시험을 치르도록한다
-    //시험을 봐야하는건 학생
-    public void makeTest(Student student) {
-        student.takeTest(role);
+    public void exam() { //시험은 모든 반이 보게된다
+        List<Classroom> classrooms = school.getAllClassroom();
+        for (Classroom classroom : classrooms) {
+            classroom.takeExam(role);
+        }
     }
 
-    public void receive() {
+    public void joinSchool(School school, Map<Day, Classroom> schedule) {
+        this.school = school;
+        this.schedule = schedule;
+    }
+
+    public void receiveSalary() {
         money += salary;
     }
 
@@ -34,7 +46,9 @@ public class Teacher {
     public String toString() {
         return "Teacher{" +
                 "role=" + role +
+                ", schedule=" + schedule +
                 ", money=" + money +
+                ", salary=" + salary +
                 '}';
     }
 }
