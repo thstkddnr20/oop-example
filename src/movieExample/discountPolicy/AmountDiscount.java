@@ -2,7 +2,7 @@ package movieExample.discountPolicy;
 
 import movieExample.Money;
 
-public class AmountDiscount extends DiscountPolicy {
+public class AmountDiscount implements DiscountPolicy {
     private Money discountAmount;
 
     @Override

@@ -2,7 +2,7 @@ package movieExample.discountPolicy;
 
 import movieExample.Money;
 
-public class PercentDiscount extends DiscountPolicy {
+public class PercentDiscount implements DiscountPolicy {
     private double percent;
 
     @Override
