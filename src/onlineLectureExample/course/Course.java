@@ -1,5 +1,7 @@
 package onlineLectureExample.course;
 
+import onlineLectureExample.Subscription;
+import onlineLectureExample.payment.Money;
 import onlineLectureExample.user.Instructor;
 
 import java.time.LocalDate;
@@ -7,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Course {
+
+    private CourseStatus courseStatus;
+
     private String name;
     private Instructor instructor;
     private List<Section> sections;
@@ -14,7 +19,13 @@ public class Course {
     private Difficulty level;
 
     private LocalDate postTime;
-    private CourseStatus courseStatus;
+
+    //payment
+    private Money price;
+
+    //subscription
+    private Subscription subscription;
+
 
     //make your course exposed to the students
     public void post() {
@@ -32,13 +43,31 @@ public class Course {
         }
     }
 
-    //constructor
-    public Course(String name, Instructor instructor, Category category, Difficulty level) {
+    //constructor1
+    public Course(String name, Instructor instructor, Category category, Difficulty level, Money price) {
         this.name = name;
         this.instructor = instructor;
         this.sections = new ArrayList<>();
         this.category = category;
         this.level = level;
+        this.price = price;
+
+        this.subscription = Subscription.NONE;
+
+        courseStatus = CourseStatus.DRAFT;
+        postTime = null;
+    }
+
+    //constructor2 - with subscription
+    public Course(String name, Instructor instructor, Category category, Difficulty level, Money price, Subscription subscription) {
+        this.name = name;
+        this.instructor = instructor;
+        this.sections = new ArrayList<>();
+        this.category = category;
+        this.level = level;
+        this.price = price;
+
+        this.subscription = subscription;
 
         courseStatus = CourseStatus.DRAFT;
         postTime = null;
